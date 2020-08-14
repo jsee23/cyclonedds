@@ -115,6 +115,10 @@ install(
   DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
   COMPONENT dev)
 
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "QNX")
+  target_link_libraries(ddsc INTERFACE socket)
+endif()
+
 # TODO: improve test inclusion.
 if((BUILD_TESTING) AND (BUILD_IDLC) AND ((NOT DEFINED MSVC_VERSION) OR (MSVC_VERSION GREATER "1800")))
   add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/tests")
