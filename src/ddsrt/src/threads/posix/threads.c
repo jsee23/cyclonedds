@@ -61,6 +61,9 @@ typedef struct {
 /* VX_TASK_NAME_LENGTH is the maximum number of bytes, excluding
    null-terminating byte, for a thread name. */
 #define MAXTHREADNAMESIZE (VX_TASK_NAME_LENGTH)
+#elif defined(__QNX__)
+#include <sys/neutrino.h>
+#define MAXTHREADNAMESIZE _NTO_THREAD_NAME_MAX
 #endif /* __APPLE__ */
 
 size_t
