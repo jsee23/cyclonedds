@@ -505,9 +505,13 @@ int os_sockWaitsetNextEvent (os_sockWaitsetCtx ctx, ddsi_tran_conn_t * conn)
 
 #if !_WIN32 && !LWIP_SOCKET
 
-#ifndef __VXWORKS__
+#ifdef __QNX__
+#include <sys/types.h>
+#include <unistd.h>
+#include <fcntl.h>
+#elif !defined(__VXWORKS__)
 #include <sys/fcntl.h>
-#endif /* __VXWORKS__ */
+#endif /* __QNX__ */
 
 #ifndef _WRS_KERNEL
 #include <sys/select.h>

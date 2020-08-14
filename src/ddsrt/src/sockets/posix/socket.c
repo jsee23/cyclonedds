@@ -22,6 +22,10 @@
 #include <vxWorks.h>
 #include <sockLib.h>
 #include <ioLib.h>
+#elif defined(__QNX__)
+#include <sys/types.h>
+#include <unistd.h>
+#include <fcntl.h>
 #else
 #include <sys/fcntl.h>
 #endif /* __VXWORKS__ */
