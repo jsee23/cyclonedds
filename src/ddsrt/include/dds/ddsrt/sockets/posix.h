@@ -49,7 +49,7 @@ typedef int ddsrt_socket_t;
 # define IFF_LOOPBACK         0x8
 # define IFF_POINTOPOINT     0x10
 # define IFF_MULTICAST     0x1000
-#elif defined(__SunOS_5_6 ) || defined(__QNX__)
+#elif defined(__SunOS_5_6 )
 # define DDSRT_HAVE_IPV6        0
 # define DDSRT_HAVE_DNS         DDSRT_WITH_DNS
 # define DDSRT_HAVE_GETADDRINFO 0
@@ -57,10 +57,18 @@ typedef int ddsrt_socket_t;
 # define DDSRT_HAVE_INET_NTOP   0
 # define DDSRT_HAVE_INET_PTON   0
 #else /* LWIP_SOCKET */
+#if defined(__QNX__)
+# define DDSRT_HAVE_IPV6        0
+#else
 # define DDSRT_HAVE_IPV6        1
+#endif /* __QNX__ */
 # define DDSRT_HAVE_DNS         DDSRT_WITH_DNS
 # define DDSRT_HAVE_GETADDRINFO DDSRT_WITH_DNS
+#if defined(__QNX__)
+# define DDSRT_HAVE_SSM         0
+#else
 # define DDSRT_HAVE_SSM         1
+#endif /* __QNX__ */
 # define DDSRT_HAVE_INET_NTOP   1
 # define DDSRT_HAVE_INET_PTON   1
 #endif /* LWIP_SOCKET */
