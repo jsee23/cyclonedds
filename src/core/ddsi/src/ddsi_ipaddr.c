@@ -20,6 +20,10 @@
 #include "dds/ddsi/q_config.h"
 #include "dds/ddsi/ddsi_domaingv.h"
 
+#if defined(__QNX__)
+# include <stdlib.h>
+#endif /* __QNX__ */
+
 int ddsi_ipaddr_compare (const struct sockaddr *const sa1, const struct sockaddr *const sa2)
 {
   int eq;
