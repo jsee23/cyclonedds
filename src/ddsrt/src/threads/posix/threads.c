@@ -81,7 +81,7 @@ ddsrt_thread_getname(char *str, size_t size)
      portability. e.g. musl libc. */
   (void)prctl(PR_GET_NAME, (unsigned long)buf, 0UL, 0UL, 0UL);
   cnt = ddsrt_strlcpy(str, buf, size);
-#elif defined(__APPLE__)
+#elif defined(__APPLE__) || defined(__QNX__)
   /* pthread_getname_np on APPLE uses strlcpy to copy the thread name, but
      does not return the number of bytes (that would have been) written. Use
      an intermediate buffer. */
@@ -127,7 +127,7 @@ ddsrt_thread_setname(const char *__restrict name)
 {
   assert(name != NULL);
 
-#if defined(__linux)
+#if defined(__linux) || defined(__QNX__)
   /* Thread names are limited to 16 bytes on Linux. ERANGE is returned if the
      name exceeds the limit, so silently truncate. */
   char buf[MAXTHREADNAMESIZE + 1] = "";
